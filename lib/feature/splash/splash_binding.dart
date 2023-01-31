@@ -11,10 +11,10 @@ class SplashBinding implements Bindings{
   @override
   void dependencies() {
     Get.lazyPut<DioClient>(() => DioClientImpl());
-    Get.lazyPut<AuthRepository>(() => AuthRepositoryImpl(Get.find<DioClient>()));
+    Get.lazyPut<AuthRepositoryImpl>(() => AuthRepositoryImpl(Get.find<DioClient>()));
     Get.lazyPut<FirebaseAuthService>(() => FirebaseAuthServiceImpl());
     Get.put(SplashController(
-      authRepository: Get.find<AuthRepository>(),
+      authRepositoryImpl: Get.find<AuthRepositoryImpl>(),
       firebaseAuthService: Get.find<FirebaseAuthService>(),
     ));
   }

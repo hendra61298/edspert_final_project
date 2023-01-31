@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:submission_finpro/data/repository_impl/auth_repository_impl.dart';
 
 
 import '../../../data/services/firebase_auth_service.dart';
@@ -11,9 +12,9 @@ import '../../domain/repository/auth_repository.dart';
 
 class LoginController extends GetxController {
   final FirebaseAuthService firebaseAuthService;
-  final AuthRepository authRepository;
+  final AuthRepositoryImpl authRepositoryImpl;
 
-  LoginController({required this.firebaseAuthService, required this.authRepository});
+  LoginController({required this.firebaseAuthService, required this.authRepositoryImpl});
 
 
   /// Steps:
@@ -35,7 +36,7 @@ class LoginController extends GetxController {
   Future<void> isUserRegistered() async {
     String? email = FirebaseAuth.instance.currentUser?.email;
     if (email != null) {
-      UserData? userData = await authRepository.getUserByEmail(email: email);
+      UserData? userData = await authRepositoryImpl.getUserByEmail(email: email);
       if (userData != null) {
         // User is Registered
         Get.offAllNamed(Routes.dashboard);

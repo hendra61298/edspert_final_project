@@ -19,8 +19,8 @@ class AuthRepositoryImpl implements AuthRepository{
         Urls.users,
         queryParameters: {"email": email},
       );
-
       UserResponse res = UserResponse.fromJson(result);
+
       return res.data;
     } catch (e, stackTrace) {
       if (kDebugMode) {

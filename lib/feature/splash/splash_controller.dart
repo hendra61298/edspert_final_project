@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:submission_finpro/data/repository_impl/auth_repository_impl.dart';
 
 
 import '../../core/router/routes.dart';
@@ -13,10 +14,10 @@ import '../../domain/repository/auth_repository.dart';
 
 class SplashController extends GetxController {
   final FirebaseAuthService firebaseAuthService;
-  final AuthRepository authRepository;
+  final AuthRepositoryImpl authRepositoryImpl;
 
   SplashController({
-    required this.authRepository,
+    required this.authRepositoryImpl,
     required this.firebaseAuthService,
   });
 
@@ -42,8 +43,8 @@ class SplashController extends GetxController {
   Future<void> isUserRegistered() async {
     String? email = firebaseAuthService.getCurrentSignedInUserEmail();
     if (email != null) {
-      UserData? userData = await authRepository.getUserByEmail(email: email);
-      if (userData != null) {
+      UserData? userData = await authRepositoryImpl.getUserByEmail(email: email);
+      if (userData?.userEmail != null) {
         // User is Registered
         // Navigate to Dashboard Page
         Get.offAllNamed(Routes.dashboard);
