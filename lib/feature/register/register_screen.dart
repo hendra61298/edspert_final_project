@@ -67,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     FormBuilderValidators.email(),
                   ]),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 30),
                 const Text('Nama Lengkap'),
                 TextFormField(
                   controller: _fullNameTextController,
@@ -82,7 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     FormBuilderValidators.minLength(6),
                   ]),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 30),
                 const Text('Nama Sekolah'),
                 TextFormField(
                   controller: _schoolNameTextController,
@@ -97,12 +97,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     FormBuilderValidators.minLength(6),
                   ]),
                 ),
+                const SizedBox(height: 30),
+                const Text('Pilih Kelas'),
                 DropdownButton<String?>(
                   value: kelas,
                   items: ['10', '11', '12']
                       .map((element) => DropdownMenuItem<String?>(
-                    child: Text('Kelas $element'),
                     value: element,
+                    child: Text('Kelas $element'),
                   ))
                       .toList(),
                   onChanged: (value) {
@@ -113,45 +115,50 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     });
                   },
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            jenisKelamin = 'Laki-Laki';
-                          });
-                        },
-                        child: Container(
-                          color: jenisKelamin == 'Laki-Laki' ? Colors.green : Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 6),
-                          child: Text(
-                            'Laki-Laki',
-                            style: TextStyle(
-                              color: jenisKelamin == 'Laki-Laki' ? Colors.white : Colors.black,
+                const SizedBox(height: 30),
+                const Text('Pilih Gender'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              jenisKelamin = 'Laki-Laki';
+                            });
+                          },
+                          child: Container(
+                            color: jenisKelamin == 'Laki-Laki' ? Colors.blue : Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 6),
+                            child: Text(
+                              'Laki-Laki',
+                              style: TextStyle(
+                                color: jenisKelamin == 'Laki-Laki' ? Colors.white : Colors.black,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            jenisKelamin = 'Perempuan';
-                          });
-                        },
-                        child: Container(
-                          color: jenisKelamin == 'Perempuan' ? Colors.green : Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 6),
-                          child: Text('Perempuan',
-                              style: TextStyle(
-                                color: jenisKelamin == 'Perempuan' ? Colors.white : Colors.black,
-                              )),
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              jenisKelamin = 'Perempuan';
+                            });
+                          },
+                          child: Container(
+                            color: jenisKelamin == 'Perempuan' ? Colors.blue : Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 6),
+                            child: Text('Perempuan',
+                                style: TextStyle(
+                                  color: jenisKelamin == 'Perempuan' ? Colors.white : Colors.black,
+                                )),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -181,7 +188,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           backgroundColor: Colors.red,
                         );
                       }
-                      Get.snackbar('Valid!!!', '.......', snackPosition: SnackPosition.BOTTOM);
                     } else {
                       Get.snackbar('Invalid!!', '.......');
                     }
@@ -191,7 +197,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-        ): Center(child: CircularProgressIndicator(),);
+        ): const Center(child: CircularProgressIndicator(),);
       }
     );
   }

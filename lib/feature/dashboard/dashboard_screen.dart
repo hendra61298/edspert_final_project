@@ -67,7 +67,11 @@ class DashboardScreen extends GetView<DashboardController> {
 
   List<Widget> _bodyList() => [
     const HomeScreen(),
-    const Placeholder(child: Text('Diskusi Soal')),
+    const Center(child: Text("Comming Soon",
+      style: TextStyle(
+        fontWeight: FontWeight.bold
+      ),
+    ),),
     const ProfileScreen(),
   ];
 }

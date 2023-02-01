@@ -26,6 +26,6 @@ class DashboardBinding implements Bindings {
     ));
     Get.lazyPut(() => DashboardController());
     Get.lazyPut(() =>
-        HomeController(Get.find<FirebaseAuthService>(), Get.find<CourseRepositoryImpl>(), Get.find<BannerRepositoryImpl>()));
+        HomeController(Get.find<FirebaseAuthService>(), Get.find<CourseRepositoryImpl>(), Get.find<BannerRepositoryImpl>(), Get.find<AuthRepositoryImpl>()));
   }
 }

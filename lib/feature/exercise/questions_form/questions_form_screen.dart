@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:submission_finpro/feature/exercise/questions_form/questions_form_controller.dart';
 
 import '../../../domain/entities/question_list_data.dart';
+import 'package:html/parser.dart' show parse;
 
 class ExerciseFromScreen extends StatelessWidget {
   const ExerciseFromScreen({Key? key}) : super(key: key);
@@ -38,11 +39,13 @@ class ExerciseFromScreen extends StatelessWidget {
                   itemCount: questions.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => IconButton(
-                    icon: Text(
-                      '${index + 1}',
-                      style: TextStyle(
-                        fontWeight: index == activeQuestionIndex ? FontWeight.w800 : FontWeight.w400,
-                        color: index == activeQuestionIndex ? Colors.blue : Colors.black,
+                    icon: CircleAvatar(
+                      child: Text(
+                        '${index + 1}',
+                        style: TextStyle(
+                          fontWeight: index == activeQuestionIndex ? FontWeight.w800 : FontWeight.w400,
+                          color: index == activeQuestionIndex ? Colors.yellow : Colors.white,
+                        ),
                       ),
                     ),
                     onPressed: () {
@@ -53,11 +56,16 @@ class ExerciseFromScreen extends StatelessWidget {
               ),
 
               // Judul/Pertanyaan Soal
-              Text(activeQuestion.questionTitle ?? ''),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                child: Text(parse(activeQuestion.questionTitle ?? '').documentElement!.text,
+                    textAlign: TextAlign.justify,
+                ),
+              ),
 
               //
               RadioListTile(
-                title: Text(activeQuestion.optionA ?? ''),
+                title: Text(parse(activeQuestion.optionA).documentElement!.text ?? ''),
                 value: 'A',
                 groupValue: selectedAnswer,
                 onChanged: (val) {
@@ -65,7 +73,7 @@ class ExerciseFromScreen extends StatelessWidget {
                 },
               ),
               RadioListTile(
-                title: Text(activeQuestion.optionB ?? ''),
+                title: Text(parse(activeQuestion.optionB).documentElement!.text  ?? ''),
                 value: 'B',
                 groupValue: selectedAnswer,
                 onChanged: (val) {
@@ -73,7 +81,7 @@ class ExerciseFromScreen extends StatelessWidget {
                 },
               ),
               RadioListTile(
-                title: Text(activeQuestion.optionC ?? ''),
+                title: Text(parse(activeQuestion.optionC).documentElement!.text  ?? ''),
                 value: 'C',
                 groupValue: selectedAnswer,
                 onChanged: (val) {
@@ -81,7 +89,7 @@ class ExerciseFromScreen extends StatelessWidget {
                 },
               ),
               RadioListTile(
-                title: Text(activeQuestion.optionD ?? ''),
+                title: Text(parse(activeQuestion.optionD).documentElement!.text  ?? ''),
                 value: 'D',
                 groupValue: selectedAnswer,
                 onChanged: (val) {
@@ -89,7 +97,7 @@ class ExerciseFromScreen extends StatelessWidget {
                 },
               ),
               RadioListTile(
-                title: Text(activeQuestion.optionE ?? ''),
+                title: Text(parse(activeQuestion.optionE).documentElement!.text  ?? ''),
                 value: 'E',
                 groupValue: selectedAnswer,
                 onChanged: (val) {
@@ -98,56 +106,62 @@ class ExerciseFromScreen extends StatelessWidget {
               ),
 
               if (activeQuestionIndex < questions.length - 1)
-                ElevatedButton(
-                  onPressed: () {
-                    controller.navigateToQuestionIndex(activeQuestionIndex + 1);
-                  },
-                  child: const Text('SELANJUTNYA'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      controller.navigateToQuestionIndex(activeQuestionIndex + 1);
+                    },
+                    child: const Text('SELANJUTNYA'),
+                  ),
                 )
               else
-                ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
-                  onPressed: () {
-                    Get.bottomSheet(
-                      Wrap(
-                        children: [
-                          Column(
-                            children: [
-                              const SizedBox(height: 16),
-                              const Text('Kumpulkan latihan soal sekarang?'),
-                              const SizedBox(height: 16),
-                              Row(
-                                children: [
-                                  const SizedBox(width: 32),
-                                  Expanded(
-                                    child: OutlinedButton(
-                                      onPressed: () {
-                                        Get.back();
-                                      },
-                                      child: const Text('Nanti Dulu'),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 32),
-                                  Expanded(
-                                    child: ElevatedButton(
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
+                    onPressed: () {
+                      Get.bottomSheet(
+                        Wrap(
+                          children: [
+                            Column(
+                              children: [
+                                const SizedBox(height: 16),
+                                const Text('Kumpulkan latihan soal sekarang?'),
+                                const SizedBox(height: 16),
+                                Row(
+                                  children: [
+                                    const SizedBox(width: 32),
+                                    Expanded(
+                                      child: OutlinedButton(
                                         onPressed: () {
                                           Get.back();
-                                          controller.submitAnswers();
                                         },
-                                        child: const Text('Ya')),
-                                  ),
-                                  const SizedBox(width: 32),
-                                ],
-                              ),
-                              const SizedBox(height: 32),
-                            ],
-                          ),
-                        ],
-                      ),
-                      backgroundColor: Colors.white,
-                    );
-                  },
-                  child: const Text('KUMPULIN'),
+                                        child: const Text('Nanti Dulu'),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 32),
+                                    Expanded(
+                                      child: ElevatedButton(
+                                          onPressed: () {
+                                            Get.back();
+                                            controller.submitAnswers();
+                                          },
+                                          child: const Text('Ya')),
+                                    ),
+                                    const SizedBox(width: 32),
+                                  ],
+                                ),
+                                const SizedBox(height: 32),
+                              ],
+                            ),
+                          ],
+                        ),
+                        backgroundColor: Colors.white,
+                      );
+                    },
+                    child: const Text('KUMPULIN'),
+                  ),
                 ),
             ],
           ),
