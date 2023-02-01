@@ -44,6 +44,7 @@ class SplashController extends GetxController {
     String? email = firebaseAuthService.getCurrentSignedInUserEmail();
     if (email != null) {
       UserData? userData = await authRepositoryImpl.getUserByEmail(email: email);
+      print(userData);
       if (userData?.userEmail != null) {
         // User is Registered
         // Navigate to Dashboard Page
@@ -51,7 +52,7 @@ class SplashController extends GetxController {
       } else {
         // User is Signed In & Is not Registered
         // Navigate to Register Form Page
-        Get.offAllNamed(Routes.registerForm);
+        Get.offAllNamed(Routes.registerForm,arguments: email);
       }
     } else {
       // User is Not Signed In

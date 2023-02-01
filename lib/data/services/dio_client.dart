@@ -42,6 +42,7 @@ class DioClientImpl implements DioClient {
         url,
         queryParameters: queryParameters,
       );
+      print(response);
 
       return response.data;
     } on DioError catch (e) {

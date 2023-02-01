@@ -19,13 +19,27 @@ class UserResponse{
 @JsonSerializable()
 class UserData {
   String? iduser;
+
+  @JsonKey(name: 'user_name')
   String? userName;
+
+  @JsonKey(name: 'user_email')
   String? userEmail;
+
+  @JsonKey(name: 'user_foto')
   String? userFoto;
+
+  @JsonKey(name: 'user_asal_sekolah')
   String? userAsalSekolah;
+
+  @JsonKey(name: 'date_create')
   String? dateCreate;
   String? jenjang;
+
+  @JsonKey(name: 'user_gender')
   String? userGender;
+
+  @JsonKey(name: 'user_status')
   String? userStatus;
 
   UserData(

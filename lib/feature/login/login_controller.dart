@@ -37,12 +37,12 @@ class LoginController extends GetxController {
     String? email = FirebaseAuth.instance.currentUser?.email;
     if (email != null) {
       UserData? userData = await authRepositoryImpl.getUserByEmail(email: email);
-      if (userData != null) {
+      if (userData?.userEmail != null) {
         // User is Registered
         Get.offAllNamed(Routes.dashboard);
       } else {
         // User is Signed In & Is not Registered
-        Get.offAllNamed(Routes.registerForm);
+        Get.offAllNamed(Routes.registerForm, arguments: email);
       }
     } else {
       Get.offAllNamed(Routes.login);

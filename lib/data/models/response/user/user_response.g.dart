@@ -23,24 +23,24 @@ Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
 
 UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       iduser: json['iduser'] as String?,
-      userName: json['userName'] as String?,
-      userEmail: json['userEmail'] as String?,
-      userFoto: json['userFoto'] as String?,
-      userAsalSekolah: json['userAsalSekolah'] as String?,
-      dateCreate: json['dateCreate'] as String?,
+      userName: json['user_name'] as String?,
+      userEmail: json['user_email'] as String?,
+      userFoto: json['user_foto'] as String?,
+      userAsalSekolah: json['user_asal_sekolah'] as String?,
+      dateCreate: json['date_create'] as String?,
       jenjang: json['jenjang'] as String?,
-      userGender: json['userGender'] as String?,
-      userStatus: json['userStatus'] as String?,
+      userGender: json['user_gender'] as String?,
+      userStatus: json['user_status'] as String?,
     );
 
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'iduser': instance.iduser,
-      'userName': instance.userName,
-      'userEmail': instance.userEmail,
-      'userFoto': instance.userFoto,
-      'userAsalSekolah': instance.userAsalSekolah,
-      'dateCreate': instance.dateCreate,
+      'user_name': instance.userName,
+      'user_email': instance.userEmail,
+      'user_foto': instance.userFoto,
+      'user_asal_sekolah': instance.userAsalSekolah,
+      'date_create': instance.dateCreate,
       'jenjang': instance.jenjang,
-      'userGender': instance.userGender,
-      'userStatus': instance.userStatus,
+      'user_gender': instance.userGender,
+      'user_status': instance.userStatus,
     };

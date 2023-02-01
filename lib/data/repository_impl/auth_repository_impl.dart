@@ -15,6 +15,7 @@ class AuthRepositoryImpl implements AuthRepository{
   @override
   Future<UserData?> getUserByEmail({required String email}) async {
     try {
+
       final result = await dioClient.get(
         Urls.users,
         queryParameters: {"email": email},
@@ -33,7 +34,10 @@ class AuthRepositoryImpl implements AuthRepository{
   @override
   Future<bool> registerUser({required UserBody userBody}) async {
     try {
-      await dioClient.post(Urls.userRegister, body: userBody.toJson());
+      print(userBody);
+     final result = await dioClient.post(Urls.userRegister, body: userBody.toJson());
+
+        print(result);
       return true;
     } catch (e, stackTrace) {
       if (kDebugMode) {

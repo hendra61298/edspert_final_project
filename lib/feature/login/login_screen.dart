@@ -10,7 +10,7 @@ import '../../widgets/signin_google_button.dart';
 import 'login_controller.dart';
 
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends GetView<LoginController> {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
